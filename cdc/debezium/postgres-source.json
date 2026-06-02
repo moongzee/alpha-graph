@@ -1,0 +1,34 @@
+{
+  "name": "fin-postgres-source",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "fin",
+    "database.password": "fin",
+    "database.dbname": "findb",
+
+    "topic.prefix": "fin",
+    "plugin.name": "pgoutput",
+    "publication.name": "fin_pub",
+    "slot.name": "fin_slot",
+
+    "table.include.list": "public.assets,public.raw_news,public.price_bars,public.events",
+
+    "snapshot.mode": "initial",
+    "tombstones.on.delete": "false",
+
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter.schemas.enable": "false",
+
+    "transforms": "unwrap",
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.drop.tombstones": "false",
+    "transforms.unwrap.delete.handling.mode": "rewrite",
+    "transforms.unwrap.add.fields": "op,table,ts_ms,source.lsn"
+  }
+}

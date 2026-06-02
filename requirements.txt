@@ -1,0 +1,18 @@
+# ── 핵심 (파이프라인 + 에이전트) ──
+neo4j>=5.20             # Neo4j Bolt 드라이버
+confluent-kafka>=2.4    # Kafka consumer
+psycopg[binary]>=3.1    # Postgres 접속
+
+# ── 수집기 (선택) ──
+feedparser>=6.0         # RSS 뉴스
+ccxt>=4.3               # 암호화폐 거래소 시세
+# yfinance>=0.2         # 주식 시세 (필요 시 주석 해제)
+
+# ── LLM 백엔드 (둘 중 사용하는 것만) ──
+openai>=1.30
+anthropic>=0.30
+
+# ── 품질 고도화 (M7, 선택) ──
+# transformers>=4.40    # FinBERT 감성
+# torch>=2.2
+# sentence-transformers>=3.0   # 임베딩

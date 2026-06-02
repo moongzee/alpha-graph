@@ -1,0 +1,44 @@
+# Railway 서비스별 환경변수 템플릿
+# 각 서비스(Railway Dashboard > 서비스 > Variables)에 아래 값을 넣는다.
+# <...>는 Railway가 제공하는 실제 값으로 치환.
+
+# ============================================================
+# [서비스: postgres]  ← Railway 공식 Postgres 플러그인 사용 시 자동 제공
+#   PGHOST, PGPORT, PGUSER, PGPASSWORD, PGDATABASE, DATABASE_URL 자동 생성됨
+#   findb를 쓰려면 DATABASE_URL의 db명을 맞추거나 기본 railway db 사용
+# ============================================================
+
+# ============================================================
+# [서비스: kafka]
+# ============================================================
+RAILWAY_PRIVATE_DOMAIN=<자동제공: 예) kafka.railway.internal>
+KAFKA_INTERNAL_PORT=9092
+KAFKA_CONTROLLER_PORT=29093
+KAFKA_CLUSTER_ID=fin-cluster-0000000000
+KAFKA_LOG_DIRS=/var/lib/kafka/data
+# (Volume을 /var/lib/kafka/data 에 마운트 권장)
+
+# ============================================================
+# [서비스: connect]
+# ============================================================
+KAFKA_BOOTSTRAP=kafka.railway.internal:9092
+CONNECT_GROUP_ID=fin-connect
+
+# ============================================================
+# [서비스: neo4j]
+# ============================================================
+NEO4J_AUTH=neo4j/<강한_비밀번호>
+# (Volume을 /data 에 마운트 권장)
+
+# ============================================================
+# [서비스: app]
+# ============================================================
+PG_DSN=postgresql://<PGUSER>:<PGPASSWORD>@postgres.railway.internal:5432/<PGDATABASE>
+KAFKA_BOOTSTRAP=kafka.railway.internal:9092
+CONNECT_URL=http://connect.railway.internal:8083
+NEO4J_URI=bolt://neo4j.railway.internal:7687
+NEO4J_USER=neo4j
+NEO4J_PASSWORD=<위 NEO4J_AUTH의 비밀번호>
+# LLM (선택: 없으면 StubClient 데모모드)
+# OPENAI_API_KEY=sk-...
+# ANTHROPIC_API_KEY=sk-ant-...

@@ -1,0 +1,32 @@
+# ── Python ──
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── 시크릿/환경 ──
+.env
+.env.*
+*.local
+secrets.*
+# 단, 템플릿은 추적
+!deploy/railway/ENV_TEMPLATE.txt
+
+# ── 에디터/툴 메타 ──
+.bkit/
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# ── 데이터/로그 ──
+*.log
+data/
+*.dump
+neo4j_data/
+pgdata/
